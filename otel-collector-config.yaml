@@ -15,8 +15,13 @@ exporters:
     tls:
       insecure: true
 
+  prometheus:
+    endpoint: "${env:PROMETHEUS_HTTP_ENDPOINT}"
+    
 processors:
-  batch: {}
+  batch:
+  spanmetrics:
+    metrics_exporter: prometheus
 
 extensions:
   health_check: {}
@@ -31,4 +36,4 @@ service:
     metrics:
       receivers: [otlp]
       processors: [batch]
-      exporters: [debug]
+      exporters: [debug, prometheus]
