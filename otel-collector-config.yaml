@@ -2,16 +2,16 @@ receivers:
   otlp:
     protocols:
       grpc:
-        endpoint: opentelemetry-collector.railway.internal:4317
+        endpoint: 0.0.0.0:4317
       http:
-        endpoint: opentelemetry-collector.railway.internal:4318
+        endpoint: 0.0.0.0:4318
 
 exporters:
   debug:
     verbosity: detailed
 
   otlp:
-    endpoint: jaeger.railway.internal:4317
+    endpoint: "${env:JEAGER_HTTP_ENDPOINT}"
     tls:
       insecure: true
 
