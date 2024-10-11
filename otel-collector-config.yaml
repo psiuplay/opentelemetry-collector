@@ -38,6 +38,6 @@ service:
       processors: [batch, spanmetrics]
       exporters: [debug, otlp]
     metrics:
-      receivers: [otlp, otlp/spanmetrics]]
+      receivers: [otlp, otlp/spanmetrics]
       processors: [batch]
       exporters: [debug, prometheus]
