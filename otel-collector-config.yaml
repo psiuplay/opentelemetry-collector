@@ -10,22 +10,20 @@ receivers:
       grpc:
         endpoint: 0.0.0.0:12346
 
+processors:
+  batch: {}
+  spanmetrics:
+    metrics_exporter: prometheus
+
 exporters:
   debug:
     verbosity: detailed
-
   otlp:
     endpoint: "${env:JEAGER_HTTP_ENDPOINT}"
     tls:
       insecure: true
-
   prometheus:
     endpoint: "${env:PROMETHEUS_HTTP_ENDPOINT}"
-    
-processors:
-  batch:
-  spanmetrics:
-    metrics_exporter: prometheus
 
 extensions:
   health_check: {}
