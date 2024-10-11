@@ -5,6 +5,10 @@ receivers:
         endpoint: 0.0.0.0:4317
       http:
         endpoint: 0.0.0.0:4318
+  otlp/spanmetrics:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:12346
 
 exporters:
   debug:
@@ -31,9 +35,9 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]
+      processors: [batch, spanmetrics]
       exporters: [debug, otlp]
     metrics:
-      receivers: [otlp]
+      receivers: [otlp, otlp/spanmetrics]]
       processors: [batch]
       exporters: [debug, prometheus]
